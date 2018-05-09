@@ -12,7 +12,7 @@ module.exports = (app, db) => {
   app.get('/event/:id', (req, res) => {
     const id = req.params.id;
     db.event.find({
-        attributes: ['name', 'id', 'url', 'start', 'thumbnail', 'eventid'],
+      attributes: ['name', 'id', 'url', 'start', 'thumbnail', 'eventid'],
       where: { id: id }
     })
       .then(event => {

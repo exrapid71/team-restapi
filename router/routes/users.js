@@ -14,7 +14,7 @@ module.exports = (app, db) => {
   app.get('/user/:id', (req, res) => {
     const id = req.params.id;
     db.user.find({
-        attributes: ['id', 'name', 'email', 'image_url', 'skills', 'interest_areas'],
+      attributes: ['id', 'name', 'email', 'image_url', 'skills', 'interest_areas'],
       where: { id: id }
     })
       .then(user => {

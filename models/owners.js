@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    updated_at:  DataTypes.DATE,
+    updated_at: DataTypes.DATE,
     deleted_at: DataTypes.DATE
   }, {
-    paranoid: true,
-    underscored: true
-  });
+      paranoid: true,
+      underscored: true
+    });
   return Owner;
 };

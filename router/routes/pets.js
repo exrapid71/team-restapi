@@ -13,7 +13,7 @@ module.exports = (app, db) => {
   app.get('/pet/:id', (req, res) => {
     const id = req.params.id;
     db.pets.find({
-      where: { id: id}
+      where: { id: id }
     })
       .then(pet => {
         res.json(pet);
@@ -32,8 +32,8 @@ module.exports = (app, db) => {
       type: type
     })
       .then(newPet => {
-      res.json(newPet);
-    });
+        res.json(newPet);
+      });
   });
 
   // PATCH single pet

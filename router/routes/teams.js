@@ -14,7 +14,7 @@ module.exports = (app, db) => {
   app.get('/team/:id', (req, res) => {
     const id = req.params.id;
     db.team.find({
-        attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
+      attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
       where: { id: id }
     })
       .then(team => {

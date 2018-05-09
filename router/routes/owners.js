@@ -14,7 +14,7 @@ module.exports = (app, db) => {
   app.get('/owner/:id', (req, res) => {
     const id = req.params.id;
     db.owners.find({
-      where: { id: id}
+      where: { id: id }
     })
       .then(owner => {
         res.json(owner);
