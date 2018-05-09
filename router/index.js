@@ -3,7 +3,11 @@
 const routes = [
   require('./routes/owners'),
   require('./routes/pets'),
-  require('./routes/tweets')
+  require('./routes/tweets'),
+  require('./routes/events'),
+  require('./routes/projects'),
+  require('./routes/teams'),
+  require('./routes/users')
 ];
 
 

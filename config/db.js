@@ -22,6 +22,11 @@ db.sequelize = sequelize;
 db.owners = require('../models/owners.js')(sequelize, Sequelize);
 db.pets = require('../models/pets.js')(sequelize, Sequelize);
 db.tweet = require('../models/tweets.js')(sequelize, Sequelize);
+db.event = require('../models/events.js')(sequelize, Sequelize);
+db.project = require('../models/projects.js')(sequelize, Sequelize);
+db.team = require('../models/teams.js')(sequelize, Sequelize);
+db.user = require('../models/users.js')(sequelize, Sequelize);
+
 //Relations
 db.pets.belongsTo(db.owners);
 db.owners.hasMany(db.pets);
