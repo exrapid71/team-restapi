@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (app, db) => {
-  // GET all tweets
+
   app.get('/users', (req, res) => {
     db.user.findAll({
       attributes: ['id', 'name', 'email', 'image_url', 'skills', 'interest_areas']
@@ -22,7 +22,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // POST single tweet
   app.post('/user', (req, res) => {
     const text = req.body.text;
     db.user.create({
@@ -70,6 +69,7 @@ module.exports = (app, db) => {
   // dont work
   app.get('/user/findproject/:id', (req, res) => {
     const user_id = req.params.id;
+    var info = [];
     db.userskill.findAll({
       attributes: ['id', 'user_id', 'skill_id'],
       where: { user_id: user_id }
@@ -99,11 +99,56 @@ module.exports = (app, db) => {
         });
         //res.json(userskill[0].skill_id);
         */
+
         Object.keys(userskill).forEach(function (k) {
-          res.json(userskill[k].skill_id);
-        });
+          var skill = userskill[k].skill_id;
+          info.push(skill);
+          //});
+        })
+        var all = [];
+        //res.json(info);
+
+        Object.keys(info).forEach(function (k) {
+          var skill_id = info[k];
+          res.json(skill_id);
+          var square = function (skill_id) {
+            return (
+              db.projectskill.findAll({
+                attributes: ['id', 'project_id', 'skill_id'],
+                where: { skill_id: skill_id }
+              })
+            );
+          };
+          //res.json(square);
+          all.push(square.project_id);
+        })
+
+        //res.json(info);
+        //res.json(all);
       });
+    /*
+    .then(info => {
+      var all = [];
+      //res.json(info);
+      /*
+      Object.keys(info).forEach(function (k) {
+        var skill_id = info[k];
+        var square = function (skill_id) {
+          return (
+            db.projectskill.findAll({
+              attributes: ['id', 'project_id', 'skill_id'],
+              where: { skill_id: skill_id }
+            })
+          );
+        };
+        all.push(square);
+      })
+      // * 
+    });
+    */
+    //res.json(all);
   });
+  //});
   /*
   var events = data.events;
   for (var i = 0; i < events.length; i++) {
