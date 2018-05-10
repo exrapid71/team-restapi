@@ -36,6 +36,22 @@ module.exports = (app, db) => {
       })
   });
 
+  app.patch('/team/:id', (req, res) => {
+    const id = req.params.id;
+    const updates = req.body.updates;
+    db.team.find({
+      attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
+      where: { id: id }
+    })
+      .then(team => {
+        return team.updateAttributes(updates)
+      })
+      .then(updatedteam => {
+        res.json(updatedteam);
+      });
+  });
+
+
 
   /*
   

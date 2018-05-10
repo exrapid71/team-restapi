@@ -7,7 +7,9 @@ const routes = [
   require('./routes/events'),
   require('./routes/projects'),
   require('./routes/teams'),
-  require('./routes/users')
+  require('./routes/users'),
+  require('./routes/skills'),
+  require('./routes/interests')
 ];
 
 
