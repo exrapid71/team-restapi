@@ -37,6 +37,25 @@ module.exports = (app, db) => {
       })
   });
 
+  app.patch('/user/:id', (req, res) => {
+    const id = req.params.id;
+    const updates = req.body.updates;
+    db.user.find({
+      where: { id: id }
+    })
+      .then(user => {
+        return user.updateAttributes({
+          name: req.body.name,
+          email: req.body.email,
+          image_url: req.body.image_url,
+          skills: req.body.skills,
+          interest_areas: req.body.interest_areas
+        })
+      })
+      .then(updateduser => {
+        res.json(updateduser);
+      });
+  });
 
   /*
   

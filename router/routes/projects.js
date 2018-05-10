@@ -38,6 +38,27 @@ module.exports = (app, db) => {
       })
   });
 
+  app.patch('/project/:id', (req, res) => {
+    const id = req.params.id;
+    const updates = req.body.updates;
+    db.project.find({
+      where: { id: id }
+    })
+      .then(project => {
+        return project.updateAttributes({
+          title: req.body.title,
+          description: req.body.description,
+          members: req.body.members,
+          wanted_skills: req.body.wanted_skills,
+          wanted_info: req.body.wanted_info,
+          contact_mail: req.body.contact_mail
+        })
+      })
+      .then(updatedproject => {
+        res.json(updatedproject);
+      });
+  });
+
 
   /*
   

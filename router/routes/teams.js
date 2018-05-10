@@ -29,7 +29,7 @@ module.exports = (app, db) => {
       name: req.body.name,
       members: req.body.members,
       info: req.body.info,
-      contact_mail: req.body.contact_mail,
+      contact_mail: req.body.contact_mail
     })
       .then(newteam => {
         res.json(newteam);
@@ -40,11 +40,15 @@ module.exports = (app, db) => {
     const id = req.params.id;
     const updates = req.body.updates;
     db.team.find({
-      attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
       where: { id: id }
     })
       .then(team => {
-        return team.updateAttributes(updates)
+        return team.updateAttributes({
+          name: req.body.name,
+          members: req.body.members,
+          info: req.body.info,
+          contact_mail: req.body.contact_mail
+        })
       })
       .then(updatedteam => {
         res.json(updatedteam);
