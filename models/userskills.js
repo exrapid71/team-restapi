@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         attributes: {
             id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-            skill_id: { type: DataTypes.INTEGER, allowNull: false },
             user_id: { type: DataTypes.INTEGER, allowNull: false },
+            skill_id: { type: DataTypes.INTEGER, allowNull: false },
             updated_at: DataTypes.DATE,
             deleted_at: DataTypes.DATE
         }

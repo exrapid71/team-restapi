@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = (app, db) => {
-  // GET all tweets
   app.get('/projects', (req, res) => {
     db.project.findAll({
       attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail']
@@ -22,9 +21,7 @@ module.exports = (app, db) => {
       });
   });
 
-  // POST single tweet
   app.post('/project', (req, res) => {
-    //const text = req.body.text;
     db.project.create({
       title: req.body.title,
       description: req.body.description,
@@ -40,7 +37,6 @@ module.exports = (app, db) => {
 
   app.patch('/project/:id', (req, res) => {
     const id = req.params.id;
-    const updates = req.body.updates;
     db.project.find({
       where: { id: id }
     })

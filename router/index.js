@@ -9,7 +9,9 @@ const routes = [
   require('./routes/teams'),
   require('./routes/users'),
   require('./routes/skills'),
-  require('./routes/interests')
+  require('./routes/interests'),
+  require('./routes/userskills'),
+  require('./routes/projectskills')
 ];
 
 

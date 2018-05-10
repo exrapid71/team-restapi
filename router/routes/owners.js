@@ -2,7 +2,6 @@
 
 module.exports = (app, db) => {
 
-  // GET all owners
   app.get('/owners', (req, res) => {
     db.owners.findAll()
       .then(owners => {
@@ -10,7 +9,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // GET one owner by id
   app.get('/owner/:id', (req, res) => {
     const id = req.params.id;
     db.owners.find({
@@ -21,7 +19,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // POST single owner
   app.post('/owner', (req, res) => {
     const name = req.body.name;
     const role = req.body.role;
@@ -34,7 +31,6 @@ module.exports = (app, db) => {
       })
   });
 
-  // PATCH single owner
   app.patch('/owner/:id', (req, res) => {
     const id = req.params.id;
     const updates = req.body.updates;
@@ -49,7 +45,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // DELETE single owner
   app.delete('/owner/:id', (req, res) => {
     const id = req.params.id;
     db.owners.destroy({

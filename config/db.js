@@ -28,15 +28,20 @@ db.team = require('../models/teams.js')(sequelize, Sequelize);
 db.user = require('../models/users.js')(sequelize, Sequelize);
 db.skill = require('../models/skills.js')(sequelize, Sequelize);
 db.interest = require('../models/interests.js')(sequelize, Sequelize);
-//db.userskill = require('../models/userskill.js')(sequelize, Sequelize);
-
+db.userskill = require('../models/userskills.js')(sequelize, Sequelize);
+db.projectskill = require('../models/projectskills.js')(sequelize, Sequelize);
 //Relations
 db.pets.belongsTo(db.owners);
 db.owners.hasMany(db.pets);
-/*
-db.user.hasMany(userskill);
-db.skill.hasMany(userskill);
+
+db.user.hasMany(db.userskill);
+db.skill.hasMany(db.userskill);
 db.userskill.belongsTo(db.user);
 db.userskill.belongsTo(db.skill);
-*/
+
+db.project.hasMany(db.projectskill);
+db.skill.hasMany(db.projectskill);
+db.projectskill.belongsTo(db.project);
+db.projectskill.belongsTo(db.skill);
+
 module.exports = db;

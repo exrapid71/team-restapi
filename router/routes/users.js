@@ -57,55 +57,37 @@ module.exports = (app, db) => {
       });
   });
 
-  /*
-  
-  app.get('/tweet/:id', (req, res) => {
-    const tweetid = req.params.id;
-    db.tweet.find({
-      where: { tweetid: tweetid }
+  app.get('/user/skill/:id', (req, res) => {
+    const user_id = req.params.id;
+    db.userskill.findAll({
+      attributes: ['id', 'user_id', 'skill_id'],
+      where: { user_id: user_id }
     })
-      .then(tweet => {
-        res.json(tweet);
+      .then(userskill => {
+        res.json(userskill);
+      });
+  });
+  // dont work
+  app.get('/user/findproject/:id', (req, res) => {
+    const user_id = req.params.id;
+    db.userskill.findAll({
+      attributes: ['id', 'user_id', 'skill_id'],
+      where: { user_id: user_id }
+    })
+      .then(userskill => {
+        var array = userskill.skill_id;
+        array.forEach(element => {
+          const skill_id = element;
+          db.projectskill.findAll({
+            attributes: ['id', 'project_id', 'skill_id'],
+            where: { skill_id: skill_id }
+          })
+            .then(projectskill => {
+              res.json(projectskill);
+            });
+        });
+        //res.json(userskill);
       });
   });
 
-  // POST single tweet
-  app.post('/tweet', (req, res) => {
-    const name = req.body.name;
-    const role = req.body.role;
-    db.tweets.create({
-      name: name,
-      role: role
-    })
-      .then(newtweet => {
-        res.json(newtweet);
-      })
-  });
-
-  // PATCH single tweet
-  app.patch('/tweet/:id', (req, res) => {
-    const id = req.params.id;
-    const updates = req.body.updates;
-    db.tweets.find({
-      where: { id: id }
-    })
-      .then(tweet => {
-        return tweet.updateAttributes(updates)
-      })
-      .then(updatedtweet => {
-        res.json(updatedtweet);
-      });
-  });
-
-  // DELETE single tweet
-  app.delete('/tweet/:id', (req, res) => {
-    const id = req.params.id;
-    db.tweets.destroy({
-      where: { id: id }
-    })
-      .then(deletedtweet => {
-        res.json(deletedtweet);
-      });
-  });
-  */
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (app, db) => {
-  // GET all pets
+
   app.get('/pets', (req, res) => {
     db.pets.findAll()
       .then(pets => {
@@ -9,7 +9,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // GET one pet by id
   app.get('/pet/:id', (req, res) => {
     const id = req.params.id;
     db.pets.find({
@@ -20,7 +19,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // POST single pet
   app.post('/pet', (req, res) => {
     console.log('hihi', req.body)
     const name = req.body.name;
@@ -36,7 +34,6 @@ module.exports = (app, db) => {
       });
   });
 
-  // PATCH single pet
   app.patch('/pet/:id', (req, res) => {
     const id = req.params.id;
     const updates = req.body.updates;
