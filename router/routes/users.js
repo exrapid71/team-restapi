@@ -75,8 +75,9 @@ module.exports = (app, db) => {
       where: { user_id: user_id }
     })
       .then(userskill => {
-        var array = userskill.skill_id;
-        array.forEach(element => {
+        //var ids = userskill.skill_id;
+        /*
+        ids.forEach(element => {
           const skill_id = element;
           db.projectskill.findAll({
             attributes: ['id', 'project_id', 'skill_id'],
@@ -85,9 +86,42 @@ module.exports = (app, db) => {
             .then(projectskill => {
               res.json(projectskill);
             });
+          id.forEach((id) => {
+            console.log(size);
+          });
         });
-        //res.json(userskill);
+        /*
+        //var count = Object.keys(userskill).length;
+        Object.keys(userskill).forEach(function (k) {
+          return routes.forEach((route) => {
+            route(app, db);
+          });
+        });
+        //res.json(userskill[0].skill_id);
+        */
+        Object.keys(userskill).forEach(function (k) {
+          res.json(userskill[k].skill_id);
+        });
       });
   });
-
+  /*
+  var events = data.events;
+  for (var i = 0; i < events.length; i++) {
+    var eventInfo = [];
+    eventName = events[i].name.text;
+    eventId = events[i].id;
+    eventUrl = events[i].url;
+    eventStartdate = events[i].start.local;
+    eventThumbnail = events[i].logo.url;
+    eventInfo.push([
+      eventName,
+      eventId,
+      eventUrl,
+      eventStartdate,
+      eventThumbnail
+    ]);
+    eventData.push([eventName, eventId, eventUrl, eventStartdate, eventThumbnail]);
+    checkEventDatabase(eventId, eventInfo);
+  }
+*/
 };

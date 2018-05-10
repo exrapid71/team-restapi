@@ -39,7 +39,7 @@ module.exports = (app, db) => {
     })
       .then(owner => {
         return owner.updateAttributes(updates)
-      })
+      })  
       .then(updatedOwner => {
         res.json(updatedOwner);
       });
