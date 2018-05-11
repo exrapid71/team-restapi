@@ -105,6 +105,8 @@ module.exports = (app, db) => {
     var info = [];
     var count = [];
     var data = [];
+    var promises1 = [];
+    var promises2 = [];
     var index;
     var index1;
     db.userskill.findAll({
@@ -119,7 +121,7 @@ module.exports = (app, db) => {
           var skill_id = count[index].skill_id;
           console.log("skill id " + skill_id);
           console.log("index " + index);
-          return db.projectskill.findAll({
+          var newPromise = db.projectskill.findAll({
             attributes: ['id', 'project_id', 'skill_id'],
             where: { skill_id: skill_id }
           })
@@ -127,6 +129,7 @@ module.exports = (app, db) => {
               console.log("index " + index);
               var con = project[index].project_id;
               console.log("con " + con);
+              promises1.push(newPromise);
               info.push(con);
             })
             .then(smt => {
@@ -136,21 +139,24 @@ module.exports = (app, db) => {
                 console.log("smt4");
                 console.log("index " + index1);
                 var project_id = info[index1];
-                return db.project.findAll({
+                var promisess = db.project.findAll({
                   attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
                   where: { id: project_id }
                 })
                   .then(project => {
+                    promises2.push(promisess);
                     var con = project;
                     data.push(con);
                     console.log("index " + index);
                     console.log("index1 " + index1);
                   });
+                return Promise.all(promises2);
               }
               console.log("index " + index);
               console.log("index1 " + index1);
               //return data
             })
+          return Promise.all(promises1);
         }
         console.log("index " + index);
         console.log("index1 " + index1);
@@ -158,7 +164,58 @@ module.exports = (app, db) => {
       .then(projectall => {
         res.json(data);
       });
+
+    /*
+    var members = req.body.members;
+    models.sequelize.transaction(function (t) {
+    var promises = []
+    for (var i = 0; i < members.length; i++) {
+      var newPromise = models.User.create({ 'firstname': members[i], 'email': members[i], 'pending': true }, { transaction: t });
+      promises.push(newPromise);
+    };
+    return Promise.all(promises).then(function (users) {
+      var userPromises = [];
+      for (var i = 0; i < users.length; i++) {
+        userPromises.push(users[i].addInvitations([group], { transaction: t }));
+      }
+      return Promise.all(userPromises);
+    });
+  }).then(function (result) {
+    console.log("YAY");
+  }).catch(function (err) {
+    console.log("NO!!!");
+    return next(err);
   });
+  */
+  });
+  /*
+  app.get('/user/find/:id', (req, res) => {
+    var user_id = req.body.id;
+    db.userskill.findAll({
+      attributes: ['id', 'user_id', 'skill_id'],
+      where: { user_id: user_id }
+    }) 
+    models.sequelize.transaction(function (t) {
+      var promises = []
+      for (var i = 0; i < members.length; i++) {
+        var newPromise = models.User.create({ 'firstname': members[i], 'email': members[i], 'pending': true }, { transaction: t });
+        promises.push(newPromise);
+      };
+      return Promise.all(promises).then(function (users) {
+        var userPromises = [];
+        for (var i = 0; i < users.length; i++) {
+          userPromises.push(users[i].addInvitations([group], { transaction: t }));
+        }
+        return Promise.all(userPromises);
+      });
+    }).then(function (result) {
+      console.log("YAY");
+    }).catch(function (err) {
+      console.log("NO!!!");
+      return next(err);
+    });
+  });
+  */
   /*
   app.get('/user/find/:id', (req, res) => {
     req.tables.Client.find({
