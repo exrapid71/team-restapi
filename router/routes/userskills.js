@@ -44,4 +44,13 @@ module.exports = (app, db) => {
             });
     });
 
+    app.delete('/userskill/:id', (req, res) => {
+        const id = req.params.id;
+        db.userskill.destroy({
+            where: { id: id }
+        })
+            .then(deletedtweet => {
+                res.json(deletedtweet);
+            });
+    });
 };

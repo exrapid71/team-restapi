@@ -51,4 +51,15 @@ module.exports = (app, db) => {
         res.json(updatedteam);
       });
   });
+
+  app.delete('/team/:id', (req, res) => {
+    const id = req.params.id;
+    db.team.destroy({
+      where: { id: id }
+    })
+      .then(deletedTeam => {
+        res.json(deletedTeam);
+      });
+  });
+
 };
