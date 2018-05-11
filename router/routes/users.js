@@ -66,107 +66,71 @@ module.exports = (app, db) => {
         res.json(userskill);
       });
   });
-  // dont work
+
+  // find only one project
   app.get('/user/findproject/:id', (req, res) => {
     const user_id = req.params.id;
-    var info = [];
     db.userskill.findAll({
       attributes: ['id', 'user_id', 'skill_id'],
       where: { user_id: user_id }
     })
-      .then(userskill => {
-        //var ids = userskill.skill_id;
-        /*
-        ids.forEach(element => {
-          const skill_id = element;
-          db.projectskill.findAll({
-            attributes: ['id', 'project_id', 'skill_id'],
-            where: { skill_id: skill_id }
-          })
-            .then(projectskill => {
-              res.json(projectskill);
-            });
-          id.forEach((id) => {
-            console.log(size);
-          });
-        });
-        /*
-        //var count = Object.keys(userskill).length;
-        Object.keys(userskill).forEach(function (k) {
-          return routes.forEach((route) => {
-            route(app, db);
-          });
-        });
-        //res.json(userskill[0].skill_id);
-        */
-
-        Object.keys(userskill).forEach(function (k) {
-          var skill = userskill[k].skill_id;
-          info.push(skill);
-          //});
-        })
-        var all = [];
-        //res.json(info);
-
-        Object.keys(info).forEach(function (k) {
-          var skill_id = info[k];
-          res.json(skill_id);
-          var square = function (skill_id) {
-            return (
-              db.projectskill.findAll({
-                attributes: ['id', 'project_id', 'skill_id'],
-                where: { skill_id: skill_id }
-              })
-            );
-          };
-          //res.json(square);
-          all.push(square.project_id);
-        })
-
-        //res.json(info);
-        //res.json(all);
-      });
-    /*
-    .then(info => {
-      var all = [];
-      //res.json(info);
-      /*
-      Object.keys(info).forEach(function (k) {
-        var skill_id = info[k];
-        var square = function (skill_id) {
-          return (
-            db.projectskill.findAll({
-              attributes: ['id', 'project_id', 'skill_id'],
-              where: { skill_id: skill_id }
-            })
-          );
-        };
-        all.push(square);
+      .then(userSkill => {
+        return userSkill;
       })
-      // * 
-    });
-    */
-    //res.json(all);
+      .then(skillinfo => {
+        var skill_id = skillinfo[0].skill_id;
+        return db.projectskill.findAll({
+          attributes: ['id', 'project_id', 'skill_id'],
+          where: { skill_id: skill_id }
+        })
+      })
+      .then(project => {
+        return project
+      })
+      .then(projectInfo => {
+        var project_id = projectInfo[0].project_id;
+
+        db.project.find({
+          attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
+          where: { id: project_id }
+
+        })
+          .then(project => {
+            res.json(project);
+          });
+      });
   });
-  //});
-  /*
-  var events = data.events;
-  for (var i = 0; i < events.length; i++) {
-    var eventInfo = [];
-    eventName = events[i].name.text;
-    eventId = events[i].id;
-    eventUrl = events[i].url;
-    eventStartdate = events[i].start.local;
-    eventThumbnail = events[i].logo.url;
-    eventInfo.push([
-      eventName,
-      eventId,
-      eventUrl,
-      eventStartdate,
-      eventThumbnail
-    ]);
-    eventData.push([eventName, eventId, eventUrl, eventStartdate, eventThumbnail]);
-    checkEventDatabase(eventId, eventInfo);
-  }
-*/
+  app.get('/user/findprojects/:id', (req, res) => {
+    const user_id = req.params.id;
+    db.userskill.findAll({
+      attributes: ['id', 'user_id', 'skill_id'],
+      where: { user_id: user_id }
+    })
+      .then(userSkill => {
+        return userSkill;
+      })
+      .then(skillinfo => {
+        var skill_id = skillinfo[0].skill_id;
+        return db.projectskill.findAll({
+          attributes: ['id', 'project_id', 'skill_id'],
+          where: { skill_id: skill_id }
+        })
+      })
+      .then(project => {
+        return project
+      })
+      .then(projectInfo => {
+        var project_id = projectInfo[0].project_id;
+
+        db.project.find({
+          attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
+          where: { id: project_id }
+
+        })
+          .then(project => {
+            res.json(project);
+          });
+      });
+  });
+
 };
