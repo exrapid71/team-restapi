@@ -41,4 +41,24 @@ module.exports = (app, db) => {
         res.json(deletedtweet);
       });
   });
+
+  //filter only one parameter
+  app.get('/tweet', function (req, res) {
+    var tweetid = req.param('id');
+    //let parsedQs = req.parse(parsedUrl.query); 
+    //console.log(req);
+    // req.query /tweet? den sonra yazılan yerşeyi çekip json formatında döndürüyor 
+    // req.query.id  tweet?id=1 i parse edebiliyor
+    // req._parsedUrl.query tweet? den sonraki queryi veriyor
+    // sql injection olabilir
+    console.log("tweetid " + req._parsedUrl.query);
+    db.tweet.findAll({
+      attributes: ['tweetid', 'text'],
+      where: { tweetid: tweetid }
+    })
+      .then(tweet => {
+        res.json(tweet);
+      });
+  });
+
 };

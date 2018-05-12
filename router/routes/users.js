@@ -1,5 +1,5 @@
 'use strict';
-
+var _ = require('underscore');
 module.exports = (app, db) => {
 
   app.get('/users', (req, res) => {
@@ -114,148 +114,114 @@ module.exports = (app, db) => {
       where: { user_id: user_id }
     })
       .then(userSkill => {
-        return count = userSkill
+        return count = userSkill;
       }).then(counts => {
+
         for (index = 0; index <= count.length; index++) {
-          console.log("smt1");
           var skill_id = count[index].skill_id;
           console.log("skill id " + skill_id);
-          console.log("index " + index);
-          var newPromise = db.projectskill.findAll({
+          return db.projectskill.findAll({
             attributes: ['id', 'project_id', 'skill_id'],
             where: { skill_id: skill_id }
           })
             .then(project => {
-              console.log("index " + index);
               var con = project[index].project_id;
-              console.log("con " + con);
-              promises1.push(newPromise);
               info.push(con);
             })
             .then(smt => {
-              console.log("smt3");
               for (index1 = 0; index1 < count.length; index1++) {
-
-                console.log("smt4");
-                console.log("index " + index1);
                 var project_id = info[index1];
-                var promisess = db.project.findAll({
+                return db.project.findAll({
                   attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
                   where: { id: project_id }
                 })
                   .then(project => {
-                    promises2.push(promisess);
                     var con = project;
                     data.push(con);
-                    console.log("index " + index);
-                    console.log("index1 " + index1);
                   });
-                return Promise.all(promises2);
               }
-              console.log("index " + index);
-              console.log("index1 " + index1);
-              //return data
+              return data;
             })
-          return Promise.all(promises1);
+          return info;
         }
-        console.log("index " + index);
-        console.log("index1 " + index1);
       })
       .then(projectall => {
         res.json(data);
       });
+  });
 
-    /*
-    var members = req.body.members;
-    models.sequelize.transaction(function (t) {
-    var promises = []
-    for (var i = 0; i < members.length; i++) {
-      var newPromise = models.User.create({ 'firstname': members[i], 'email': members[i], 'pending': true }, { transaction: t });
-      promises.push(newPromise);
-    };
-    return Promise.all(promises).then(function (users) {
-      var userPromises = [];
-      for (var i = 0; i < users.length; i++) {
-        userPromises.push(users[i].addInvitations([group], { transaction: t }));
-      }
-      return Promise.all(userPromises);
-    });
-  }).then(function (result) {
-    console.log("YAY");
-  }).catch(function (err) {
-    console.log("NO!!!");
-    return next(err);
-  });
-  */
-  });
-  /*
+  //work but dont return anything
   app.get('/user/find/:id', (req, res) => {
-    var user_id = req.body.id;
+    const user_id = req.params.id;
+    var done;
+    var done1;
+    var data = [];
+    var info, sm;
     db.userskill.findAll({
       attributes: ['id', 'user_id', 'skill_id'],
       where: { user_id: user_id }
-    }) 
-    models.sequelize.transaction(function (t) {
-      var promises = []
-      for (var i = 0; i < members.length; i++) {
-        var newPromise = models.User.create({ 'firstname': members[i], 'email': members[i], 'pending': true }, { transaction: t });
-        promises.push(newPromise);
-      };
-      return Promise.all(promises).then(function (users) {
-        var userPromises = [];
-        for (var i = 0; i < users.length; i++) {
-          userPromises.push(users[i].addInvitations([group], { transaction: t }));
-        }
-        return Promise.all(userPromises);
-      });
-    }).then(function (result) {
-      console.log("YAY");
-    }).catch(function (err) {
-      console.log("NO!!!");
-      return next(err);
-    });
-  });
-  */
-  /*
-  app.get('/user/find/:id', (req, res) => {
-    req.tables.Client.find({
-      where: { id: req.params.id },
-      include: [{ model: req.tables.Project, as: 'Projects' }]
-    }).success(function (client) {
-
-      var ret = {
-        id: client.id,
-        name: client.name,
-        projects: []
-      };
-
-      done = _.after(client.projects.length, function () {
-        res.json(ret);
-      });
-
-      client.projects.forEach(function (project) {
-        project.getUsers().success(function (users) {
-
-          var u = []
-          users.forEach(function (user) {
-            u.push({
-              id: user.id,
-              name: user.name,
+    }).then(userSkill => {
+      return userSkill;
+    }).then(function (users) {
+      //done = 
+      _.after(users.length, function () {
+        //console.log("user length " + users.length);
+        //console.log("user length " + users.length);
+        return users;
+      })
+      for (var u in users) {
+        //console.log("u " + u);
+        //console.log("skill " + users[u].dataValues.skill_id);
+        var skill_id = users[u].dataValues.skill_id;
+        db.projectskill.findAll({
+          attributes: ['id', 'project_id', 'skill_id'],
+          where: { skill_id: skill_id }
+        }).then(function (interests) {
+          //console.log("interests length " + interests.length);
+          //console.log("usinterestser length " + interests.length);
+          //done1 = 
+          _.after(interests.length, function () {
+            return interests;
+          })
+          for (var v in interests) {
+            //console.log("v " + v);
+            //console.log("project " + interests[v].dataValues.project_id);
+            var project_id = interests[v].dataValues.project_id;
+            db.project.findAll({
+              attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
+              where: { id: project_id }
+            }).then(function (interest) {
+              //console.log("interest "+ interests[0].dataValues);
+              var temp = interest[0].dataValues;
+              //console.log(interest[0].dataValues);
+              //console.log(temp);
+              data.push(interest[0].dataValues);
+              //done1();
+              //console.log("temp "+ temp);
+              //console.log("1. " + data);
+            }).then(function (dataset) {
+              //console.log(data);
             });
-          });
-
-          ret.projects.push({
-            id: project.id,
-            name: project.name,
-            users: u
-          });
-          done();
-
+          }
+          console.log("2. " + data);
+          //res.json(data);
+          //return data;
         });
-
-      });
-
-    });
+        //done();
+        console.log("3. " + data);
+        //res.json(data);
+        //return done;
+      }
+      console.log("4,5. " + data);
+      //res.json(data);
+      info = sm;
+      return info
+    }).then(function (datas) {
+      console.log("4. " + data);
+      //res.json(data);
+    }).then(function (dataset) {
+      console.log("5. " + data);
+      res.json(data);
+    })
   });
-  */
 };
