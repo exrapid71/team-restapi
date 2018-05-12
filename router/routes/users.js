@@ -233,7 +233,6 @@ module.exports = (app, db) => {
                 attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
                 where: { id: team_id }
               }).then(function (interest) {
-                console.log(interest);
                 var temp = interest[0].dataValues;
                 data.push(interest[0].dataValues);
               }).then(function (dataset) {

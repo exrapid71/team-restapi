@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = (app, db) => {
+  
   app.get('/events', (req, res) => {
     db.event.findAll({
       attributes: ['name', 'id', 'url', 'start', 'thumbnail', 'eventid']
