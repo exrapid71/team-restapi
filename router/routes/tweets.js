@@ -45,8 +45,9 @@ module.exports = (app, db) => {
   //filter only one parameter
   app.get('/tweet', function (req, res) {
     var tweetid = req.param('id');
-    //let parsedQs = req.parse(parsedUrl.query); 
-    //console.log(req);
+    var text = req.param('text');
+    // let parsedQs = req.parse(parsedUrl.query); 
+    // console.log(req);
     // req.query /tweet? den sonra yazılan yerşeyi çekip json formatında döndürüyor 
     // req.query.id  tweet?id=1 i parse edebiliyor
     // req._parsedUrl.query tweet? den sonraki queryi veriyor

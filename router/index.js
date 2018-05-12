@@ -1,8 +1,6 @@
 'use strict'
 
 const routes = [
-  require('./routes/owners'),
-  require('./routes/pets'),
   require('./routes/tweets'),
   require('./routes/events'),
   require('./routes/projects'),
@@ -11,7 +9,8 @@ const routes = [
   require('./routes/skills'),
   require('./routes/interests'),
   require('./routes/userskills'),
-  require('./routes/projectskills')
+  require('./routes/projectskills'),
+  require('./routes/teamskills')
 ];
 
 
