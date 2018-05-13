@@ -10,7 +10,10 @@ const routes = [
   require('./routes/interests'),
   require('./routes/userskills'),
   require('./routes/projectskills'),
-  require('./routes/teamskills')
+  require('./routes/teamskills'),
+  require('./routes/eventteams'),
+  require('./routes/userprojects'),
+  require('./routes/userteams')
 ];
 
 

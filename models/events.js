@@ -8,12 +8,13 @@ module.exports = (sequelize, DataTypes) => {
             tableName: 'event',
         },
         attributes: {
+            id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
             name: DataTypes.STRING,
-            id: DataTypes.STRING,
+            eventid: DataTypes.STRING,
             url: DataTypes.STRING,
             start: DataTypes.STRING,
             thumbnail: DataTypes.STRING,
-            eventId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
+            description: DataTypes.STRING   
         }
     };
 

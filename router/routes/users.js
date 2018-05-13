@@ -252,5 +252,4 @@ module.exports = (app, db) => {
       });
     });
   });
-  
 };
