@@ -27,9 +27,24 @@ module.exports = (app, db) => {
     db.user.create({
       name: req.body.name,
       email: req.body.email,
+      password: req.body.password,
       image_url: req.body.image_url,
       skills: req.body.skills,
       interest_areas: req.body.interest_areas,
+    })
+      .then(newuser => {
+        res.json(newuser);
+      })
+  });
+  app.post('/user/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    db.user.find({
+      attributes : ['id'],
+      where:{
+        email: email,
+        password: password
+      }
     })
       .then(newuser => {
         res.json(newuser);
