@@ -21,7 +21,7 @@ module.exports = (app, db) => {
                 res.json(userproject);
             });
     });
-    //skillid
+    //projectid
     app.get('/userproject/user/:id', (req, res) => {
         const user_id = req.params.id;
         db.userproject.findAll({
