@@ -21,4 +21,12 @@ module.exports = (app, db) => {
         res.json(skill);
       });
   });
+  app.post('/skill', (req, res) => {
+    const text = req.body.text;
+    db.skill.create({
+        name: req.body.name
+    }).then(newSkill => {
+        res.json(newSkill);
+    })
+});
 };

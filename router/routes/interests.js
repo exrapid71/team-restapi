@@ -21,4 +21,13 @@ module.exports = (app, db) => {
         res.json(interest);
       });
   });
+  app.post('/interest', (req, res) => {
+    const text = req.body.text;
+    db.user.create({
+      name: req.body.name,
+    })
+      .then(newInterest => {
+        res.json(newInterest);
+      })
+  });
 };

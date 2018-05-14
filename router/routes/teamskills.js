@@ -44,4 +44,14 @@ module.exports = (app, db) => {
             });
     });
 
+    app.post('/teamskill', (req, res) => {
+        const text = req.body.text;
+        db.teamskill.create({
+            team_id: req.body.team_id,
+            skill_id: req.body.skill_id,
+        }).then(newteamskill => {
+            res.json(newteamskill);
+        })
+    });
+
 };

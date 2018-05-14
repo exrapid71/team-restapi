@@ -44,4 +44,14 @@ module.exports = (app, db) => {
             });
     });
 
+    app.post('/eventteam', (req, res) => {
+        const text = req.body.text;
+        db.eventteam.create({
+            team_id: req.body.team_id,
+            event_id: req.body.event_id,
+        })
+            .then(newEventteam => {
+                res.json(newEventteam);
+            })
+    });
 };

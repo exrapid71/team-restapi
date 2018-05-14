@@ -44,4 +44,15 @@ module.exports = (app, db) => {
             });
     });
 
+    app.post('/userproject', (req, res) => {
+        const text = req.body.text;
+        db.userproject.create({
+            user_id: req.body.user_id,
+            project_id: req.body.project_id,
+        }).then(userproject => {
+            res.json(userproject);
+        })
+    });
+    
+
 };

@@ -43,5 +43,14 @@ module.exports = (app, db) => {
                 res.json(userteam);
             });
     });
+    app.post('/userteam', (req, res) => {
+        const text = req.body.text;
+        db.userteam.create({
+            user_id: req.body.user_id,
+            team_id: req.body.team_id,
+        }).then(userteam => {
+            res.json(userteam);
+        })
+    });
 
 };

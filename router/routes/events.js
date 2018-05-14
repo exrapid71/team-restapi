@@ -4,7 +4,7 @@ module.exports = (app, db) => {
 
   app.get('/events', (req, res) => {
     db.event.findAll({
-      attributes: ['id', 'name', 'eventId', 'url', 'start', 'thumbnail','description']
+      attributes: ['id', 'name', 'eventId', 'url', 'start', 'thumbnail', 'description']
     })
       .then(event => {
         res.json(event);
@@ -13,7 +13,7 @@ module.exports = (app, db) => {
   app.get('/event/:id', (req, res) => {
     const id = req.params.id;
     db.event.find({
-      attributes: ['id', 'name', 'eventId', 'url', 'start', 'thumbnail','description'],
+      attributes: ['id', 'name', 'eventId', 'url', 'start', 'thumbnail', 'description'],
       where: { id: id }
     })
       .then(event => {

@@ -53,4 +53,13 @@ module.exports = (app, db) => {
                 res.json(deletedtweet);
             });
     });
+    app.post('/userskill', (req, res) => {
+        const text = req.body.text;
+        db.userskill.create({
+            team_id: req.body.team_id,
+            skill_id: req.body.skill_id,
+        }).then(userskill => {
+            res.json(userskill);
+        })
+    });
 };
