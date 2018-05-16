@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-    app.get('/userteams', (req, res) => {
+    app.get('/api/userteams', (req, res) => {
         db.userteam.findAll({
             attributes: ['id', 'user_id', 'team_id'],
         })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
             });
     });
     //userskillid
-    app.get('/userteam/:id', (req, res) => {
+    app.get('/api/userteam/:id', (req, res) => {
         const id = req.params.id;
         db.userteam.find({
             attributes: ['id', 'user_id', 'team_id'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
             });
     });
     //skillid
-    app.get('/userteam/user/:id', (req, res) => {
+    app.get('/api/userteam/user/:id', (req, res) => {
         const user_id = req.params.id;
         db.userteam.findAll({
             attributes: ['id', 'user_id', 'team_id'],
@@ -33,7 +33,7 @@ module.exports = (app, db) => {
             });
     });
     //userid
-    app.get('/userteam/team/:id', (req, res) => {
+    app.get('/api/userteam/team/:id', (req, res) => {
         const team_id = req.params.id;
         db.userteam.findAll({
             attributes: ['id', 'user_id', 'team_id'],
@@ -43,7 +43,7 @@ module.exports = (app, db) => {
                 res.json(userteam);
             });
     });
-    app.post('/userteam', (req, res) => {
+    app.post('/api/userteam', (req, res) => {
         const text = req.body.text;
         db.userteam.create({
             user_id: req.body.user_id,

@@ -2,7 +2,7 @@
 var _ = require('underscore');
 module.exports = (app, db) => {
 
-  app.get('/events', (req, res) => {
+  app.get('/api/events', (req, res) => {
     db.event.findAll({
       attributes: ['id', 'name', 'eventId', 'url', 'start', 'thumbnail', 'description']
     })
@@ -10,7 +10,7 @@ module.exports = (app, db) => {
         res.json(event);
       });
   });
-  app.get('/event/:id', (req, res) => {
+  app.get('/api/event/:id', (req, res) => {
     const id = req.params.id;
     db.event.find({
       attributes: ['id', 'name', 'eventId', 'url', 'start', 'thumbnail', 'description'],
@@ -20,7 +20,7 @@ module.exports = (app, db) => {
         res.json(event);
       });
   });
-  app.get('/event/team/:id', (req, res) => {
+  app.get('/api/event/team/:id', (req, res) => {
     const event_id = req.params.id;
     var data = [];
     var info, sm;

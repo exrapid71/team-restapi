@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
   // GET all tweets
-  app.get('/skills', (req, res) => {
+  app.get('/api/skills', (req, res) => {
     db.skill.findAll({
       attributes: ['id', 'name']
     })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/skill/:id', (req, res) => {
+  app.get('/api/skill/:id', (req, res) => {
     const id = req.params.id;
     db.skill.find({
       attributes: ['id', 'name'],
@@ -21,7 +21,7 @@ module.exports = (app, db) => {
         res.json(skill);
       });
   });
-  app.post('/skill', (req, res) => {
+  app.post('/api/skill', (req, res) => {
     const text = req.body.text;
     db.skill.create({
         name: req.body.name

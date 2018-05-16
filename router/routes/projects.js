@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (app, db) => {
-  app.get('/projects', (req, res) => {
+  app.get('/api/projects', (req, res) => {
     db.project.findAll({
       attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail']
     })
@@ -10,7 +10,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/project/:id', (req, res) => {
+  app.get('/api/project/:id', (req, res) => {
     const id = req.params.id;
     db.project.find({
       attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
@@ -21,7 +21,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.post('/project', (req, res) => {
+  app.post('/api/project', (req, res) => {
     db.project.create({
       title: req.body.title,
       description: req.body.description,
@@ -35,7 +35,7 @@ module.exports = (app, db) => {
       })
   });
 
-  app.patch('/project/:id', (req, res) => {
+  app.patch('/api/project/:id', (req, res) => {
     const id = req.params.id;
     db.project.find({
       where: { id: id }
@@ -55,7 +55,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.delete('/project/:id', (req, res) => {
+  app.delete('/api/project/:id', (req, res) => {
     const id = req.params.id;
     db.project.destroy({
       where: { id: id }

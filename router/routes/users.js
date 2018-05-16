@@ -2,7 +2,7 @@
 var _ = require('underscore');
 module.exports = (app, db) => {
 
-  app.get('/users', (req, res) => {
+  app.get('/api/users', (req, res) => {
     db.user.findAll({
       attributes: ['id', 'name', 'email', 'image_url', 'skills', 'interest_areas']
     })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/user/:id', (req, res) => {
+  app.get('/api/user/:id', (req, res) => {
     const id = req.params.id;
     db.user.find({
       attributes: ['id', 'name', 'email', 'image_url', 'skills', 'interest_areas'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.post('/user', (req, res) => {
+  app.post('/api/user', (req, res) => {
     const text = req.body.text;
     db.user.create({
       name: req.body.name,
@@ -36,7 +36,7 @@ module.exports = (app, db) => {
         res.json(newuser);
       })
   });
-  app.post('/user/login', (req, res) => {
+  app.post('/api/user/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     db.user.find({
@@ -51,7 +51,7 @@ module.exports = (app, db) => {
       })
   });
 
-  app.patch('/user/:id', (req, res) => {
+  app.patch('/api/user/:id', (req, res) => {
     const id = req.params.id;
     const updates = req.body.updates;
     db.user.find({
@@ -71,7 +71,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/user/skill/:id', (req, res) => {
+  app.get('/api/user/skill/:id', (req, res) => {
     const user_id = req.params.id;
     db.userskill.findAll({
       attributes: ['id', 'user_id', 'skill_id'],
@@ -83,7 +83,7 @@ module.exports = (app, db) => {
   });
 
   // find only one project
-  app.get('/user/findproje/:id', (req, res) => {
+  app.get('/api/user/findproje/:id', (req, res) => {
     const user_id = req.params.id;
     db.userskill.findAll({
       attributes: ['id', 'user_id', 'skill_id'],
@@ -115,7 +115,7 @@ module.exports = (app, db) => {
       });
   });
   //work but return only one project
-  app.get('/user/findprojects/:id', (req, res) => {
+  app.get('/api/user/findprojects/:id', (req, res) => {
     const user_id = req.params.id;
     var info = [];
     var count = [];
@@ -166,7 +166,7 @@ module.exports = (app, db) => {
   });
 
   //work but dont return anything
-  app.get('/user/findproject/:id', (req, res) => {
+  app.get('/api/user/findproject/:id', (req, res) => {
     const user_id = req.params.id;
     var done;
     var done1;
@@ -217,7 +217,7 @@ module.exports = (app, db) => {
     });
   });
 
-  app.get('/user/findteam/:id', (req, res) => {
+  app.get('/api/user/findteam/:id', (req, res) => {
     const user_id = req.params.id;
     var done;
     var done1;

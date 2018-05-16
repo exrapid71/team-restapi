@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-  app.get('/tweets', (req, res) => {
+  app.get('/api/tweets', (req, res) => {
     db.tweet.findAll({
       attributes: ['tweetid', 'text']
     })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/tweet/:id', (req, res) => {
+  app.get('/api/tweet/:id', (req, res) => {
     const tweetid = req.params.id;
     db.tweet.find({
       attributes: ['tweetid', 'text'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.post('/tweet', (req, res) => {
+  app.post('/api/tweet', (req, res) => {
     const text = req.body.text;
     db.tweet.create({
       text: text
@@ -32,7 +32,7 @@ module.exports = (app, db) => {
       })
   });
 
-  app.delete('/tweet/:id', (req, res) => {
+  app.delete('/api/tweet/:id', (req, res) => {
     const id = req.params.id;
     db.tweets.destroy({
       where: { id: id }
@@ -43,12 +43,12 @@ module.exports = (app, db) => {
   });
 
   //filter only one parameter
-  app.get('/tweet', function (req, res) {
+  app.get('/api/tweet', function (req, res) {
     var tweetid = req.param('id');
     var text = req.param('text');
-    // let parsedQs = req.parse(parsedUrl.query); 
+    // let parsedQs = req.parse(parsedUrl.query);
     // console.log(req);
-    // req.query /tweet? den sonra yazılan yerşeyi çekip json formatında döndürüyor 
+    // req.query /tweet? den sonra yazılan yerşeyi çekip json formatında döndürüyor
     // req.query.id  tweet?id=1 i parse edebiliyor
     // req._parsedUrl.query tweet? den sonraki queryi veriyor
     // sql injection olabilir

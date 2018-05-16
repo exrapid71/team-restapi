@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-    app.get('/eventteams', (req, res) => {
+    app.get('/api/eventteams', (req, res) => {
         db.eventteam.findAll({
             attributes: ['id', 'team_id', 'event_id']
         })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
             });
     });
     //userskillid
-    app.get('/eventteam/:id', (req, res) => {
+    app.get('/api/eventteam/:id', (req, res) => {
         const id = req.params.id;
         db.eventteam.find({
             attributes: ['id', 'team_id', 'event_id'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
             });
     });
     //skillid
-    app.get('/eventteam/event/:id', (req, res) => {
+    app.get('/api/eventteam/event/:id', (req, res) => {
         const event_id = req.params.id;
         db.eventteam.findAll({
             attributes: ['id', 'team_id', 'event_id'],
@@ -33,7 +33,7 @@ module.exports = (app, db) => {
             });
     });
     //userid
-    app.get('/eventteam/team/:id', (req, res) => {
+    app.get('/api/eventteam/team/:id', (req, res) => {
         const team_id = req.params.id;
         db.eventteam.findAll({
             attributes: ['id', 'team_id', 'event_id'],
@@ -44,7 +44,7 @@ module.exports = (app, db) => {
             });
     });
 
-    app.post('/eventteam', (req, res) => {
+    app.post('/api/eventteam', (req, res) => {
         const text = req.body.text;
         db.eventteam.create({
             team_id: req.body.team_id,

@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-    app.get('/userskills', (req, res) => {
+    app.get('/api/userskills', (req, res) => {
         db.userskill.findAll({
             attributes: ['id', 'user_id', 'skill_id']
         })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
             });
     });
     //userskillid
-    app.get('/userskill/:id', (req, res) => {
+    app.get('/api/userskill/:id', (req, res) => {
         const id = req.params.id;
         db.userskill.find({
             attributes: ['id', 'user_id', 'skill_id'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
             });
     });
     //skillid
-    app.get('/userskill/skill/:id', (req, res) => {
+    app.get('/api/userskill/skill/:id', (req, res) => {
         const skill_id = req.params.id;
         db.userskill.findAll({
             attributes: ['id', 'user_id', 'skill_id'],
@@ -33,7 +33,7 @@ module.exports = (app, db) => {
             });
     });
     //userid
-    app.get('/userskill/user/:id', (req, res) => {
+    app.get('/api/userskill/user/:id', (req, res) => {
         const user_id = req.params.id;
         db.userskill.findAll({
             attributes: ['id', 'user_id', 'skill_id'],
@@ -44,7 +44,7 @@ module.exports = (app, db) => {
             });
     });
 
-    app.delete('/userskill/:id', (req, res) => {
+    app.delete('/api/userskill/:id', (req, res) => {
         const id = req.params.id;
         db.userskill.destroy({
             where: { id: id }
@@ -53,7 +53,7 @@ module.exports = (app, db) => {
                 res.json(deletedtweet);
             });
     });
-    app.post('/userskill', (req, res) => {
+    app.post('/api/userskill', (req, res) => {
         const text = req.body.text;
         db.userskill.create({
             team_id: req.body.team_id,

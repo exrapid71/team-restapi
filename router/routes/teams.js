@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-  app.get('/teams', (req, res) => {
+  app.get('/api/teams', (req, res) => {
     db.team.findAll({
       attributes: ['id', 'name', 'members', 'info', 'contact_mail']
     })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/team/:id', (req, res) => {
+  app.get('/api/team/:id', (req, res) => {
     const id = req.params.id;
     db.team.find({
       attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.post('/team', (req, res) => {
+  app.post('/api/team', (req, res) => {
     db.team.create({
       name: req.body.name,
       members: req.body.members,
@@ -34,7 +34,7 @@ module.exports = (app, db) => {
       })
   });
 
-  app.patch('/team/:id', (req, res) => {
+  app.patch('/api/team/:id', (req, res) => {
     const id = req.params.id;
     db.team.find({
       where: { id: id }
@@ -52,12 +52,12 @@ module.exports = (app, db) => {
       });
   });
 
-  app.delete('/team/:id', (req, res) => {
+  app.delete('/api/team/:id', (req, res) => {
     const id = req.params.id;
     db.team.destroy({
       where: { id: id }
     })
-      .then(deletedTeam => {
+    .then(deletedTeam => {
         res.json(deletedTeam);
       });
   });

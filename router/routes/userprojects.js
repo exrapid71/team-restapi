@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-    app.get('/userprojects', (req, res) => {
+    app.get('/api/userprojects', (req, res) => {
         db.userproject.findAll({
             attributes: ['id', 'user_id', 'project_id'],
         })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
             });
     });
     //userskillid
-    app.get('/userproject/:id', (req, res) => {
+    app.get('/api/userproject/:id', (req, res) => {
         const id = req.params.id;
         db.userproject.find({
             attributes: ['id', 'user_id', 'project_id'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
             });
     });
     //projectid
-    app.get('/userproject/user/:id', (req, res) => {
+    app.get('/api/userproject/user/:id', (req, res) => {
         const user_id = req.params.id;
         db.userproject.findAll({
             attributes: ['id', 'user_id', 'project_id'],
@@ -33,7 +33,7 @@ module.exports = (app, db) => {
             });
     });
     //userid
-    app.get('/userproject/project/:id', (req, res) => {
+    app.get('/api/userproject/project/:id', (req, res) => {
         const project_id = req.params.id;
         db.userproject.findAll({
             attributes: ['id', 'user_id', 'project_id'],
@@ -44,7 +44,7 @@ module.exports = (app, db) => {
             });
     });
 
-    app.post('/userproject', (req, res) => {
+    app.post('/api/userproject', (req, res) => {
         const text = req.body.text;
         db.userproject.create({
             user_id: req.body.user_id,
@@ -53,6 +53,6 @@ module.exports = (app, db) => {
             res.json(userproject);
         })
     });
-    
+
 
 };

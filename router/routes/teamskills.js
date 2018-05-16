@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-    app.get('/teamskills', (req, res) => {
+    app.get('/api/teamskills', (req, res) => {
         db.teamskill.findAll({
             attributes: ['id', 'team_id', 'skill_id']
         })
@@ -11,7 +11,7 @@ module.exports = (app, db) => {
             });
     });
     //userskillid
-    app.get('/teamskill/:id', (req, res) => {
+    app.get('/api/teamskill/:id', (req, res) => {
         const id = req.params.id;
         db.teamskill.find({
             attributes: ['id', 'team_id', 'skill_id'],
@@ -22,7 +22,7 @@ module.exports = (app, db) => {
             });
     });
     //skillid
-    app.get('/teamskill/skill/:id', (req, res) => {
+    app.get('/api/teamskill/skill/:id', (req, res) => {
         const skill_id = req.params.id;
         db.teamskill.findAll({
             attributes: ['id', 'team_id', 'skill_id'],
@@ -33,7 +33,7 @@ module.exports = (app, db) => {
             });
     });
     //userid
-    app.get('/teamskill/team/:id', (req, res) => {
+    app.get('/api/teamskill/team/:id', (req, res) => {
         const team_id = req.params.id;
         db.teamskill.findAll({
             attributes: ['id', 'team_id', 'skill_id'],
@@ -44,7 +44,7 @@ module.exports = (app, db) => {
             });
     });
 
-    app.post('/teamskill', (req, res) => {
+    app.post('/api/teamskill', (req, res) => {
         const text = req.body.text;
         db.teamskill.create({
             team_id: req.body.team_id,

@@ -2,7 +2,7 @@
 
 module.exports = (app, db) => {
 
-    app.get('/projectskills', (req, res) => {
+    app.get('/api/projectskills', (req, res) => {
         db.projectskill.findAll({
             attributes: ['id', 'project_id', 'skill_id']
         }).then(projectskill => {
@@ -10,7 +10,7 @@ module.exports = (app, db) => {
         });
     });
     //userskillid
-    app.get('/projectskill/:id', (req, res) => {
+    app.get('/api/projectskill/:id', (req, res) => {
         const id = req.params.id;
         db.projectskill.find({
             attributes: ['id', 'project_id', 'skill_id'],
@@ -20,7 +20,7 @@ module.exports = (app, db) => {
         });
     });
     //skillid
-    app.get('/projectskill/skill/:id', (req, res) => {
+    app.get('/api/projectskill/skill/:id', (req, res) => {
         const skill_id = req.params.id;
         db.projectskill.findAll({
             attributes: ['id', 'project_id', 'skill_id'],
@@ -30,7 +30,7 @@ module.exports = (app, db) => {
         });
     });
     //userid
-    app.get('/projectskill/project/:id', (req, res) => {
+    app.get('/api/projectskill/project/:id', (req, res) => {
         const project_id = req.params.id;
         db.projectskill.findAll({
             attributes: ['id', 'project_id', 'skill_id'],
@@ -39,8 +39,8 @@ module.exports = (app, db) => {
             res.json(projectskill);
         });
     });
-    
-    app.post('/projectskill', (req, res) => {
+
+    app.post('/api/projectskill', (req, res) => {
         const text = req.body.text;
         db.projectskill.create({
             project_id: req.body.project_id,
