@@ -1,5 +1,5 @@
 'use strict';
-
+var _ = require('underscore');
 module.exports = (app, db) => {
 
     app.get('/api/userteams', (req, res) => {
@@ -51,6 +51,37 @@ module.exports = (app, db) => {
         }).then(userteam => {
             res.json(userteam);
         })
+    });
+
+    app.get('/api/userteams/user/:id', (req, res) => {
+        const user_id = req.params.id;
+        var data = [];
+        db.userteam.findAll({
+            attributes: ['id', 'user_id', 'team_id'],
+            where: { user_id: user_id }
+        }).then(userteam => {
+            //res.json(userteam);
+            return userteam;
+        }).then(function (users) {
+            _.after(users.length, function () {
+                return users;
+            })
+            for (var u in users) {
+                var team_id = users[u].dataValues.team_id;
+                console.log(team_id);
+                db.team.find({
+                    attributes: ['id', 'name', 'members', 'info', 'contact_mail'],
+                    where: { id: team_id }
+                }).then(team => {
+                    var con = team;
+                    data.push(con);
+                });
+            }
+        }).then(projectall => {
+            setTimeout(function () {
+                res.json(data);
+            }, 100);
+        });
     });
 
 };

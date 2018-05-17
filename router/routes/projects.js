@@ -65,4 +65,27 @@ module.exports = (app, db) => {
       });
   });
 
+  app.post('/api/project/:id', (req, res) => {
+    const user_id = req.params.id;
+    db.project.create({
+      title: req.body.title,
+      description: req.body.description,
+      members: req.body.members,
+      wanted_skills: req.body.wanted_skills,
+      wanted_info: req.body.wanted_info,
+      contact_mail: req.body.contact_mail
+    })
+      .then(newproject => {
+        return newproject.id;
+        //res.json(newproject.id);
+      }).then(projectId => {
+        db.userproject.create({
+          user_id: user_id,
+          project_id: projectId,
+        }).then(userproject => {
+          res.json(userproject);
+        })
+      })
+  });
+
 };

@@ -57,9 +57,30 @@ module.exports = (app, db) => {
     db.team.destroy({
       where: { id: id }
     })
-    .then(deletedTeam => {
+      .then(deletedTeam => {
         res.json(deletedTeam);
       });
+  });
+
+  app.post('/api/team/:id', (req, res) => {
+    const user_id = req.params.id;
+    db.team.create({
+      name: req.body.name,
+      members: req.body.members,
+      info: req.body.info,
+      contact_mail: req.body.contact_mail
+    })
+      .then(newteam => {
+        return newteam.id;
+        //res.json(newproject.id);
+      }).then(teamId => {
+        db.userteam.create({
+          user_id: user_id,
+          team_id: teamId,
+        }).then(userteam => {
+          res.json(userteam);
+        })
+      })
   });
 
 };
