@@ -79,6 +79,11 @@
               <item name="restapi" type="b2602c69:ProjectViewProjectNode" />
               <item name="restapi" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="restapi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="restapi" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -136,6 +141,7 @@
       <workItem from="1526223146940" duration="2670000" />
       <workItem from="1526309957190" duration="1307000" />
       <workItem from="1526458815460" duration="1637000" />
+      <workItem from="1526800477706" duration="65000" />
     </task>
     <task id="LOCAL-00001" summary="findproject">
       <created>1526039213930</created>
@@ -221,27 +227,33 @@
       <option name="project" value="LOCAL" />
       <updated>1526458910499</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="minor">
+      <created>1526800520343</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1526800520344</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22686000" />
+    <option name="totallyTimeSpent" value="22751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="-4" width="1309" height="772" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32921174" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32921174" />
       <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32921174" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -288,10 +300,10 @@
     <MESSAGE value="delete" />
     <MESSAGE value="filter" />
     <MESSAGE value="userteam relation" />
-    <MESSAGE value="minor" />
     <MESSAGE value="add post" />
     <MESSAGE value="minor(cors)" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor(cors)" />
+    <MESSAGE value="minor" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.js">

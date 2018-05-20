@@ -40,8 +40,8 @@ module.exports = (app, db) => {
     const email = req.body.email;
     const password = req.body.password;
     db.user.find({
-      attributes : ['id'],
-      where:{
+      attributes: ['id'],
+      where: {
         email: email,
         password: password
       }
@@ -172,6 +172,7 @@ module.exports = (app, db) => {
     var done1;
     var data = [];
     var info, sm;
+    var tempIndex;
     return new Promise(function (resolve, reject) {
       db.userskill.findAll({
         attributes: ['id', 'user_id', 'skill_id'],
@@ -191,6 +192,7 @@ module.exports = (app, db) => {
             _.after(interests.length, function () {
               return interests;
             })
+            tempIndex = 0;
             for (var v in interests) {
               var project_id = interests[v].dataValues.project_id;
               db.project.findAll({
@@ -198,7 +200,39 @@ module.exports = (app, db) => {
                 where: { id: project_id }
               }).then(function (interest) {
                 var temp = interest[0].dataValues;
-                data.push(interest[0].dataValues);
+                if (tempIndex === 0) {
+                  data.push(interest[0].dataValues);
+                }
+                return interest;
+              }).then(function (project) {
+                _.after(project.length, function () {
+                  return project;
+                })
+                console.log("tempIndex " + tempIndex);
+                //console.log(project);
+                console.log("id" + project[0].dataValues.id);
+                if (tempIndex !== 0) {
+                  var tmp = 0;
+                  for (var w in data) {
+                    //console.log("same" + data[v].id);
+                    //console.log("project " + project[0].dataValues.id + " w " + w);
+                    //console.log("dataId " + data[w].id + " projectId " + project[0].dataValues.id);
+                    if ((data[w].id) === project[0].dataValues.id) {
+                      console.log("same " + data[w].id);
+                      tmp++;
+                      break;
+                    }
+                  }
+                  if (tmp === 1) {
+                    console.log("same")
+                  }
+                  else {
+                    console.log("different " + project[0].dataValues.id);
+                    data.push(project[0].dataValues);
+                  }
+                }
+
+                tempIndex++;
               }).then(function (dataset) {
                 resolve(data);
               });
@@ -223,6 +257,7 @@ module.exports = (app, db) => {
     var done1;
     var data = [];
     var info, sm;
+    var tempIndex;
     return new Promise(function (resolve, reject) {
       db.userskill.findAll({
         attributes: ['id', 'user_id', 'skill_id'],
@@ -242,6 +277,7 @@ module.exports = (app, db) => {
             _.after(interests.length, function () {
               return interests;
             })
+            tempIndex = 0;
             for (var v in interests) {
               var team_id = interests[v].dataValues.team_id;
               db.team.findAll({
@@ -249,7 +285,39 @@ module.exports = (app, db) => {
                 where: { id: team_id }
               }).then(function (interest) {
                 var temp = interest[0].dataValues;
-                data.push(interest[0].dataValues);
+                if (tempIndex === 0) {
+                  data.push(interest[0].dataValues);
+                }
+                return interest;
+              }).then(function (team) {
+                _.after(team.length, function () {
+                  return team;
+                })
+                //console.log("tempIndex " + tempIndex);
+                //console.log(team);
+                //console.log("id" + team[0].dataValues.id);
+
+                if (tempIndex !== 0) {
+                  var tmp = 0;
+                  for (var w in data) {
+                    //console.log("same" + data[v].id);
+                    //console.log("team " + team[0].dataValues.id + " w " + w);
+                    //console.log("dataId " + data[w].id + " teamId " + team[0].dataValues.id);
+                    if ((data[w].id) === team[0].dataValues.id) {
+                      console.log("same " + data[w].id);
+                      tmp++;
+                      break;
+                    }
+                  }
+                  if (tmp === 1) {
+                    console.log("same")
+                  }
+                  else {
+                    console.log("different " + team[0].dataValues.id);
+                    data.push(team[0].dataValues);
+                  }
+                }
+                tempIndex++;
               }).then(function (dataset) {
                 resolve(data);
               });
@@ -267,4 +335,5 @@ module.exports = (app, db) => {
       });
     });
   });
+  
 };
