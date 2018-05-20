@@ -1,5 +1,5 @@
 'use strict';
-
+var _ = require('underscore');
 module.exports = (app, db) => {
 
     app.get('/api/projectskills', (req, res) => {
@@ -49,5 +49,32 @@ module.exports = (app, db) => {
             res.json(newProjectSkill);
         })
     });
-
+    app.get('/api/projectskills/project/:id', (req, res) => {
+        var data = [];
+        const project_id = req.params.id;
+        db.projectskill.findAll({
+          attributes: ['id', 'project_id', 'skill_id'],
+          where: { project_id: project_id }
+        }).then(projectskill => {
+          return projectskill;
+        }).then(function (users) {
+          _.after(users.length, function () {
+            return users;
+          })
+          for (var u in users) {
+            var skill_id = users[u].dataValues.skill_id;
+            db.skill.find({
+              attributes: ['id', 'name'],
+              where: { id: skill_id }
+            }).then(skill => {
+              var con = skill;
+              data.push(con);
+            });
+          }
+        }).then(projectall => {
+          setTimeout(function () {
+            res.json(data);
+          }, 1000);
+        });
+      });
 };

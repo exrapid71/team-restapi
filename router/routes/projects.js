@@ -4,10 +4,9 @@ module.exports = (app, db) => {
   app.get('/api/projects', (req, res) => {
     db.project.findAll({
       attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail']
-    })
-      .then(project => {
-        res.json(project);
-      });
+    }).then(project => {
+      res.json(project);
+    });
   });
 
   app.get('/api/project/:id', (req, res) => {
@@ -15,10 +14,9 @@ module.exports = (app, db) => {
     db.project.find({
       attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
       where: { id: id }
-    })
-      .then(project => {
-        res.json(project);
-      });
+    }).then(project => {
+      res.json(project);
+    });
   });
 
   app.post('/api/project', (req, res) => {
@@ -29,27 +27,25 @@ module.exports = (app, db) => {
       wanted_skills: req.body.wanted_skills,
       wanted_info: req.body.wanted_info,
       contact_mail: req.body.contact_mail
+    }).then(newproject => {
+      res.json(newproject);
     })
-      .then(newproject => {
-        res.json(newproject);
-      })
   });
 
   app.patch('/api/project/:id', (req, res) => {
     const id = req.params.id;
     db.project.find({
       where: { id: id }
-    })
-      .then(project => {
-        return project.updateAttributes({
-          title: req.body.title,
-          description: req.body.description,
-          members: req.body.members,
-          wanted_skills: req.body.wanted_skills,
-          wanted_info: req.body.wanted_info,
-          contact_mail: req.body.contact_mail
-        })
+    }).then(project => {
+      return project.updateAttributes({
+        title: req.body.title,
+        description: req.body.description,
+        members: req.body.members,
+        wanted_skills: req.body.wanted_skills,
+        wanted_info: req.body.wanted_info,
+        contact_mail: req.body.contact_mail
       })
+    })
       .then(updatedproject => {
         res.json(updatedproject);
       });
@@ -59,10 +55,9 @@ module.exports = (app, db) => {
     const id = req.params.id;
     db.project.destroy({
       where: { id: id }
-    })
-      .then(deletedProject => {
-        res.json(deletedProject);
-      });
+    }).then(deletedProject => {
+      res.json(deletedProject);
+    });
   });
 
   app.post('/api/project/:id', (req, res) => {
@@ -74,18 +69,17 @@ module.exports = (app, db) => {
       wanted_skills: req.body.wanted_skills,
       wanted_info: req.body.wanted_info,
       contact_mail: req.body.contact_mail
-    })
-      .then(newproject => {
-        return newproject.id;
-        //res.json(newproject.id);
-      }).then(projectId => {
-        db.userproject.create({
-          user_id: user_id,
-          project_id: projectId,
-        }).then(userproject => {
-          res.json(userproject);
-        })
+    }).then(newproject => {
+      return newproject.id;
+      //res.json(newproject.id);
+    }).then(projectId => {
+      db.userproject.create({
+        user_id: user_id,
+        project_id: projectId,
+      }).then(userproject => {
+        res.json(userproject);
       })
+    })
   });
 
 };

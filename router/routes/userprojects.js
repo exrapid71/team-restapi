@@ -5,10 +5,9 @@ module.exports = (app, db) => {
     app.get('/api/userprojects', (req, res) => {
         db.userproject.findAll({
             attributes: ['id', 'user_id', 'project_id'],
-        })
-            .then(userproject => {
-                res.json(userproject);
-            });
+        }).then(userproject => {
+            res.json(userproject);
+        });
     });
     //userskillid
     app.get('/api/userproject/:id', (req, res) => {
@@ -16,10 +15,9 @@ module.exports = (app, db) => {
         db.userproject.find({
             attributes: ['id', 'user_id', 'project_id'],
             where: { id: id }
-        })
-            .then(userproject => {
-                res.json(userproject);
-            });
+        }).then(userproject => {
+            res.json(userproject);
+        });
     });
     //projectid
     app.get('/api/userproject/user/:id', (req, res) => {
@@ -27,10 +25,9 @@ module.exports = (app, db) => {
         db.userproject.findAll({
             attributes: ['id', 'user_id', 'project_id'],
             where: { user_id: user_id }
-        })
-            .then(userproject => {
-                res.json(userproject);
-            });
+        }).then(userproject => {
+            res.json(userproject);
+        });
     });
     //userid
     app.get('/api/userproject/project/:id', (req, res) => {
@@ -38,10 +35,9 @@ module.exports = (app, db) => {
         db.userproject.findAll({
             attributes: ['id', 'user_id', 'project_id'],
             where: { project_id: project_id }
-        })
-            .then(userproject => {
-                res.json(userproject);
-            });
+        }).then(userproject => {
+            res.json(userproject);
+        });
     });
 
     app.post('/api/userproject', (req, res) => {
@@ -62,7 +58,6 @@ module.exports = (app, db) => {
             where: { user_id: user_id }
         }).then(userteam => {
             //res.json(userteam);
-            console.log(userteam);
             return userteam;
         }).then(function (users) {
             _.after(users.length, function () {
@@ -70,7 +65,6 @@ module.exports = (app, db) => {
             })
             for (var u in users) {
                 var project_id = users[u].dataValues.project_id;
-                console.log(project_id);
                 db.project.find({
                     attributes: ['id', 'title', 'description', 'members', 'wanted_skills', 'wanted_info', 'contact_mail'],
                     where: { id: project_id }
@@ -82,7 +76,8 @@ module.exports = (app, db) => {
         }).then(projectall => {
             setTimeout(function () {
                 res.json(data);
-            }, 100);
+            }, 1000);
         });
     });
+
 };

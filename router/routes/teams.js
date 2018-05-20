@@ -72,7 +72,6 @@ module.exports = (app, db) => {
     })
       .then(newteam => {
         return newteam.id;
-        //res.json(newproject.id);
       }).then(teamId => {
         db.userteam.create({
           user_id: user_id,
@@ -82,5 +81,5 @@ module.exports = (app, db) => {
         })
       })
   });
-
+  
 };

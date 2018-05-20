@@ -5,10 +5,9 @@ module.exports = (app, db) => {
   app.get('/api/skills', (req, res) => {
     db.skill.findAll({
       attributes: ['id', 'name']
-    })
-      .then(skill => {
-        res.json(skill);
-      });
+    }).then(skill => {
+      res.json(skill);
+    });
   });
 
   app.get('/api/skill/:id', (req, res) => {
@@ -16,17 +15,36 @@ module.exports = (app, db) => {
     db.skill.find({
       attributes: ['id', 'name'],
       where: { id: id }
-    })
-      .then(skill => {
-        res.json(skill);
-      });
+    }).then(skill => {
+      res.json(skill);
+    });
   });
+
+  app.get('/api/skill/name/:name', (req, res) => {
+    const name = req.params.name;
+    db.skill.find({
+      attributes: ['id', 'name'],
+      where: { name: name }
+    }).then(skill => {
+      res.json(skill);
+    });
+  });
+
   app.post('/api/skill', (req, res) => {
     const text = req.body.text;
     db.skill.create({
-        name: req.body.name
+      name: req.body.name
     }).then(newSkill => {
-        res.json(newSkill);
+      res.json(newSkill);
     })
-});
+  });
+
+  app.delete('/api/skill/:id', (req, res) => {
+    const id = req.params.id;
+    db.skill.destroy({
+      where: { id: id }
+    }).then(skill => {
+      res.json(skill);
+    });
+  });
 };

@@ -212,7 +212,7 @@ module.exports = (app, db) => {
         reject();
         setTimeout(function () {
           res.json(data);
-        }, 100);
+        }, 1500);
       });
     });
   });
@@ -263,7 +263,7 @@ module.exports = (app, db) => {
         reject();
         setTimeout(function () {
           res.json(data);
-        }, 100);
+        }, 1500);
       });
     });
   });

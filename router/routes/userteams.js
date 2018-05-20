@@ -5,10 +5,9 @@ module.exports = (app, db) => {
     app.get('/api/userteams', (req, res) => {
         db.userteam.findAll({
             attributes: ['id', 'user_id', 'team_id'],
-        })
-            .then(userteam => {
-                res.json(userteam);
-            });
+        }).then(userteam => {
+            res.json(userteam);
+        });
     });
     //userskillid
     app.get('/api/userteam/:id', (req, res) => {
@@ -16,10 +15,9 @@ module.exports = (app, db) => {
         db.userteam.find({
             attributes: ['id', 'user_id', 'team_id'],
             where: { id: id }
-        })
-            .then(userteam => {
-                res.json(userteam);
-            });
+        }).then(userteam => {
+            res.json(userteam);
+        });
     });
     //skillid
     app.get('/api/userteam/user/:id', (req, res) => {
@@ -27,10 +25,9 @@ module.exports = (app, db) => {
         db.userteam.findAll({
             attributes: ['id', 'user_id', 'team_id'],
             where: { user_id: user_id }
-        })
-            .then(userteam => {
-                res.json(userteam);
-            });
+        }).then(userteam => {
+            res.json(userteam);
+        });
     });
     //userid
     app.get('/api/userteam/team/:id', (req, res) => {
@@ -38,10 +35,9 @@ module.exports = (app, db) => {
         db.userteam.findAll({
             attributes: ['id', 'user_id', 'team_id'],
             where: { team_id: team_id }
-        })
-            .then(userteam => {
-                res.json(userteam);
-            });
+        }).then(userteam => {
+            res.json(userteam);
+        });
     });
     app.post('/api/userteam', (req, res) => {
         const text = req.body.text;
@@ -74,13 +70,14 @@ module.exports = (app, db) => {
                     where: { id: team_id }
                 }).then(team => {
                     var con = team;
+                    //console.log(con);
                     data.push(con);
                 });
             }
         }).then(projectall => {
             setTimeout(function () {
                 res.json(data);
-            }, 100);
+            }, 1000);
         });
     });
 

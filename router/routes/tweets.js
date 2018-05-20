@@ -5,10 +5,9 @@ module.exports = (app, db) => {
   app.get('/api/tweets', (req, res) => {
     db.tweet.findAll({
       attributes: ['tweetid', 'text']
-    })
-      .then(tweet => {
-        res.json(tweet);
-      });
+    }).then(tweet => {
+      res.json(tweet);
+    });
   });
 
   app.get('/api/tweet/:id', (req, res) => {
@@ -16,30 +15,27 @@ module.exports = (app, db) => {
     db.tweet.find({
       attributes: ['tweetid', 'text'],
       where: { tweetid: tweetid }
-    })
-      .then(tweet => {
-        res.json(tweet);
-      });
+    }).then(tweet => {
+      res.json(tweet);
+    });
   });
 
   app.post('/api/tweet', (req, res) => {
     const text = req.body.text;
     db.tweet.create({
       text: text
+    }).then(newtweet => {
+      res.json(newtweet);
     })
-      .then(newtweet => {
-        res.json(newtweet);
-      })
   });
 
   app.delete('/api/tweet/:id', (req, res) => {
     const id = req.params.id;
     db.tweets.destroy({
       where: { id: id }
-    })
-      .then(deletedtweet => {
-        res.json(deletedtweet);
-      });
+    }).then(deletedtweet => {
+      res.json(deletedtweet);
+    });
   });
 
   //filter only one parameter
@@ -56,10 +52,9 @@ module.exports = (app, db) => {
     db.tweet.findAll({
       attributes: ['tweetid', 'text'],
       where: { tweetid: tweetid }
-    })
-      .then(tweet => {
-        res.json(tweet);
-      });
+    }).then(tweet => {
+      res.json(tweet);
+    });
   });
 
 };
