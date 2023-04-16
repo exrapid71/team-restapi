@@ -1,6 +1,11 @@
 # restapi
-- To update packages
 
-ncu --loglevel verbose --packageFile package.json
+Typescript version: [team-restapi-ts](https://github.com/exrapid71/team-restapi-ts)
 
-ncu -u --packageFile package.json
+## Dependencies
+
+```
+Docker ^4.0
+Mysql ^8.0
+Nodejs ^12
+```
